@@ -1,21 +1,22 @@
 ## Inicio
+Para el funcionamiendo de la presente Api se deben seguir los siguientes pasos:
 
-- Descarga o clona el repositorio e ingresa la carpeta ecommerce-php-main en la ubicación C:\laragon\www
+ 1. Descargar o clonar el repositorio e ingresar la carpeta ecommerce-php en la ubicación C:\laragon\www
 
-- En la consola, dentro del directorio C:\laragon\www\ecommerce-php-main ingresar el siguiente codigo para instalar la librerias
+ 2. Abrir la consola y ubicarse en el directorio C:\laragon\www\ecommerce-php ingresar el siguiente codigo para instalar la librerias
+ 
+ 3. ingresar el código a continuación para la instalación de las librerias
 
 ```bash
-#Actualizar librerias
 composer update
 ```
+ 
+ 4. Para la configuración de la base de datos Ingresar a la carpeta ecommerce-php, copiar el archivo ".env.example" , pegarlo y renombrarlo ".env" , sin las comillas.
+ 
+ 5. Crear una base de datos en el cliente de BD de su elección.
 
-## Configuración base de datos
+ 6. Abrir el proyecto desde Visual Studio Code, ubicarse en el archivo ".env" para configurar la información que se muestra a continuación de acuerdo a la base de datos creada.
 
-- Ingresamos a la carpeta ecommerce-php-main ubicada en C:\laragon\www, realizamos un copia del archivo .env.example y la copia la nombramos .env
-
-- Abrimos el proyecto desde Visual Studio Code e ingresamos al archivo .env para configurar la base de datos
-
-- Creamos una base de datos desde el cliente que tengamos para realizar BD y de acuerdo a la configuración de la base de datos completamos la siguiente información en el archivo .env
 
 ```bash
 DB_CONNECTION=mysql
