@@ -26,17 +26,17 @@ DB_DATABASE=laravel
 DB_USERNAME=root
 DB_PASSWORD=
 ```
-
-- Nuevamente en la consola ingresamos el siguiente codigo
+ 7. En la consola ingresamos el siguiente codigo para la generación de la clave:
 
 ```bash
-#Generar clave
 php artisan key:generate
-#Crear o Migrar las tablas en la base de datos
+```
+ 8. Ingresar el siguiente código para migrar las tablas a la base de datos
+```bash
 php artisan migrate
 ```
 
-- En la base de datos se corre el siguiente codigo para crear usuarios administrador: admin@admin.com con contraseña 123456789
+ 9. En la base de datos ingresar el administrador y los sellers a partir del siguiente código:
 
 ```bash
 insert into roles(id, name) values (1, 'ADMIN');
@@ -47,7 +47,7 @@ INSERT INTO users(id, role_id, seller_id, name, email, password, created_at, upd
 VALUES (1, 1, NULL, 'Admin', 'admin@admin.com', '$2y$10$ocpzmNFoHIwNWvY6H3ecue0QoWOOpNxHXZb3qlG6GM/MFXng7KWAi', NULL, NULL);
 ```
 
-- En la base de datos se corre el siguiente codigo para insertar datos de las categorias y las marcas:
+ 10. insertar datos de las categorias y las marcas:
 
 ```bash
 INSERT INTO categories(id, name) values (1, 'Calzado');
@@ -68,13 +68,15 @@ INSERT INTO brands(id, name) values (6, 'Samsung');
 INSERT INTO brands(id, name) values (7, 'Trek');
 ```
 
-- Se ingresa a la aplicacion con el usuario y la contraseña del administrador y se crean usuarios, seller y productos de prueba
+ 11. Ingresar a la aplicación con el usuario y la contraseña del administrador y crear usuarios, seller y productos de prueba
 
-- Se ingresa a la api https://www.postman.com/, para este caso se pueden realizar consultas para los productos y consultas para las ordenes por email, ademas de ingresar ordenes con el siguiente json
+ 12. ingresar a la aplicación POSTMAN
+
+ 13. Para la ingresar pedidos utilizar el metodo POST con la url http://ecommerce-php.test/api/pedido y el JSON que se detalla a continuación: 
 
 ```bash
 {        
-        "email": "daniela@gmail.com",
+        "email": "adsalomo@gmail.com",
         "products": [
             {                
                 "id": 6,
@@ -87,16 +89,7 @@ INSERT INTO brands(id, name) values (7, 'Trek');
         ]
 }
 ```
-
-- y as siguientes url (Importante que la aplicacion tenga el nombre ecommerce-php-main)
-
-- Para ingresar ordenes (POST y estructura JSON)
-http://ecommerce-php-main.test/api/order
-
-- Para consultar los productos por email 
-http://ecommerce-php-main.test/api/order/(se ingresa el email de alguna orden que se haya creado)
-
-
+14. Para consultar los pedidos ingresados por email utilizar el metodo GET con la url http://ecommerce-php.test/api/pedido/adsalomo@gmail.com  o el email con el que se ingreso la orden
 
 
 
