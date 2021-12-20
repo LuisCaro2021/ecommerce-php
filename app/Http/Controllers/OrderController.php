@@ -28,7 +28,7 @@ class OrderController extends Controller
         ]);
 
 
-        // Crear una pedido
+        // Crear un pedido
         $pedido = new Pedido();
         $pedido->email = $request->email;
         $pedido->saveOrFail();
@@ -41,23 +41,23 @@ class OrderController extends Controller
             return response()->json(['message' => 'Ingresar toda la información del producto']);
         }
  
+        //Ingreso de los datos a la tabla PedidosProducts
         for($i=0;$i<count($products);$i++){
-        
         $actualizarProducto = Product::find($products[$i]["id"]);
             
-        $producto= new PedidoProduct();
-        $producto->pedido_id=$idPedido;
-        $producto->product_id=$products[$i]["id"];
-        $producto->price=$actualizarProducto->price;
-        $producto->quantity=$products[$i]["quantity"];
+        $registro = new PedidoProduct();
+        $registro->pedido_id=$idPedido;
+        $registro->product_id=$products[$i]["id"];
+        $registro->price=$actualizarProducto->price;
+        $registro->quantity=$products[$i]["quantity"];
                 
-        if ($producto->quantity > $actualizarProducto->inventory OR $producto->quantity <=0) {
+        if ($registro->quantity > $actualizarProducto->inventory OR $registro->quantity <=0) {
             
             return response()->json(['message' => 'Verificar la cantidad ingresada']);
         }
-        $producto->save();
-
-        $actualizarProducto->inventory -= $producto->quantity;
+        $registro->save();
+        //Para la actualización del inventario
+        $actualizarProducto->inventory -= $registro->quantity;
         $actualizarProducto->save();
         
     } 
