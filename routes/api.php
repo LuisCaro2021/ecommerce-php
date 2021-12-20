@@ -7,8 +7,8 @@ use App\Http\Controllers\OrderController;
 
 
 use App\Models\Product;
-use App\Models\Order;
-use App\Models\OrderProduct;
+use App\Models\Pedido;
+use App\Models\PedidoProduct;
 
 /*
 |--------------------------------------------------------------------------
