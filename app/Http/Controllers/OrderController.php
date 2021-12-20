@@ -28,76 +28,72 @@ class OrderController extends Controller
         ]);
 
 
-        // Crear una orden
-        $order = new Pedido();
-        $order->email = $request->email;
-        $order->saveOrFail();
+        // Crear una pedido
+        $pedido = new Pedido();
+        $pedido->email = $request->email;
+        $pedido->saveOrFail();
 
-        $idOrder = $order->id;
+        $idPedido = $pedido->id;
  
-       //$products = $this->obtenerProductos();
  
-        // Recorrer productos
         $products = $request->input('products');
         if(count($products) <=0 ){
-            return response()->json(['message' => 'Debe ingresar toda la información del producto']);
+            return response()->json(['message' => 'Ingresar toda la información del producto']);
         }
  
-        //ingresar los datos a la tabla orderProduct
         for($i=0;$i<count($products);$i++){
         
-        $productoActualizado = Product::find($products[$i]["id"]);
+        $actualizarProducto = Product::find($products[$i]["id"]);
             
         $producto= new PedidoProduct();
-        $producto->pedido_id=$idOrder;
+        $producto->pedido_id=$idPedido;
         $producto->product_id=$products[$i]["id"];
-        $producto->price=$productoActualizado->price;
+        $producto->price=$actualizarProducto->price;
         $producto->quantity=$products[$i]["quantity"];
                 
-        if ($producto->quantity > $productoActualizado->inventory OR $producto->quantity <=0) {
+        if ($producto->quantity > $actualizarProducto->inventory OR $producto->quantity <=0) {
             
-            return response()->json(['message' => 'Verifique la cantidad ingresada']);
-        
+            return response()->json(['message' => 'Verificar la cantidad ingresada']);
         }
         $producto->save();
-        //Actualizar el inventario
-        $productoActualizado->inventory -= $producto->quantity;
-        $productoActualizado->save();
+
+        $actualizarProducto->inventory -= $producto->quantity;
+        $actualizarProducto->save();
         
     } 
        
         DB::commit();
 
-        return response()->json(['message' => 'Datos ingresados con exito']);
+        return response()->json(['message' => 'Datos ingresados correctamente']);
 
         }
 
         catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Error, Verifique la información que ingresó']);
+            return response()->json(['message' => 'Verificar la información ingresada']);
         }
-          return response()->json(['message' => 'Success']);
+          return response()->json(['message' => 'Correcto']);
 
     
     }
 
 
     public function index() {
-        $orders = Order::with(['products'])->get();
-        return response()->json($orders, 200);
+        $pedidos = Pedido::with(['products'])->get();
+        return response()->json($pedidos, 200);
     }
 
 
     public function getById($email) {
-        $orders = Pedido::with(['products'])
+        $pedidos = Pedido::with(['products'])
                             ->where('email', $email)    
                             ->first();
 
-        if (empty($orders)) {
+        if (empty($pedidos)) {
             return response()->json(['message' => 'Not Found'], 404);
         }      
 
-        return response()->json($orders, 200);
+        return response()->json($pedidos, 200);
     }  
 
 }
