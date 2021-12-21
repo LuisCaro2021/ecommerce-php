@@ -32,7 +32,7 @@ Route::post('oauth/token', 'Laravel\Passport\Http\Controllers\AccessTokenControl
 
 Route::post('product', [ProductApiController::class, 'store']);
 
-Route::get('order', [OrderController::class, 'index']);
+Route::get('pedido', [OrderController::class, 'index']);
 
 Route::post('pedido', [OrderController::class, 'create']);
 
