@@ -57,7 +57,7 @@ class OrderController extends Controller
        
         DB::commit();
 
-        return response()->json(['message' => 'Los datos se ingresaron correctamente']);
+        return response()->json(['message' => 'Los datos del pedido se ingresaron correctamente']);
 
         }
 
