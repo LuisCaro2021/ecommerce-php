@@ -23,7 +23,6 @@ class ProductApiController extends Controller
         log::info(print_r($request->input(),true));
         $product = Product::create([
             "name" => $request->input("name"),
-            //Nombre de la base de datos y nombre del json
             "description" => $request->input("description"),
             "price" => $request->input("price"),
             "inventory" => $request->input("inventory"),
@@ -39,7 +38,6 @@ class ProductApiController extends Controller
 
 
     public function create(Request $request){
-       // log::info(print_r($request->input(),true));
         $data = $request->json()->all();
 
         $categorys = $data['category'];
@@ -58,7 +56,6 @@ class ProductApiController extends Controller
         ]);
 
         $product->category->create([
-            //"id" => $categorys["id"],
             "name" => $categorys["name"],
         ]);
 
@@ -67,12 +64,6 @@ class ProductApiController extends Controller
          return response()->json($product, 201);
 
         }
-
-      
-        
-    
-
-    
     
     public function index() {
         $products = Product::with(['Category', 'Brand', 'Seller'])->get();
