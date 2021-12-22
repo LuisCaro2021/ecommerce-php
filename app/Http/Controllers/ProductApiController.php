@@ -13,10 +13,7 @@ class ProductApiController extends Controller
         //$this->middleware('auth:api')->only(['getById']);
         //$this->middleware(['client.credentials'])->only(['index']);
     }
-
-    
     public function store(Request $request){
-        
         
         log::info(print_r($request->input(),true));
         $product = Product::create([
@@ -56,8 +53,6 @@ class ProductApiController extends Controller
         $product->category->create([
             "name" => $categorias["name"],
         ]);
-
-        
 
          return response()->json($product, 201);
 
