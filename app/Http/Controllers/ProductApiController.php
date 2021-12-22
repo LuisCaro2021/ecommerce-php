@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\log;
-
 use App\Models\Product;
 
 class ProductApiController extends Controller
@@ -18,7 +17,6 @@ class ProductApiController extends Controller
     
     public function store(Request $request){
         
-    
         
         log::info(print_r($request->input(),true));
         $product = Product::create([
@@ -40,23 +38,23 @@ class ProductApiController extends Controller
     public function create(Request $request){
         $data = $request->json()->all();
 
-        $categorys = $data['category'];
+        $categorias = $data['category'];
 
-        log::info(print_r($categorys,true));
+        log::info(print_r($categorias,true));
 
         $product = Product::create([
             "name" => $data["name"],
             "description" => $data["description"],
             "price" => $data["price"],
             "inventory" => $data["inventory"],
-            "category_id" => $categorys["id"],
+            "category_id" => $categorias["id"],
             "brand_id" => $data["brand"],
             "seller_id" => $data["seller"],
             "image" => $data["image"], 
         ]);
 
         $product->category->create([
-            "name" => $categorys["name"],
+            "name" => $categorias["name"],
         ]);
 
         
