@@ -4,8 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductApiController;
 use App\Http\Controllers\OrderController;
-
-
 use App\Models\Product;
 use App\Models\Pedido;
 use App\Models\PedidoProduct;
