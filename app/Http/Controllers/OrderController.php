@@ -17,8 +17,7 @@ use App\Models\PedidoProduct;
 class OrderController extends Controller
 {
     public function create(Request $request)
-    {
-                
+    {       
         try { 
             DB::beginTransaction();
               
@@ -27,23 +26,18 @@ class OrderController extends Controller
 
         ]);
 
-
-        // Crear un pedido
         $pedido = new Pedido();
         $pedido->email = $request->email;
         $pedido->saveOrFail();
-
-        $idPedido = $pedido->id;
- 
+        $idPedido = $pedido->id; // Para Crear un pedido
  
         $products = $request->input('products');
         if(count($products) <=0 ){
             return response()->json(['message' => 'Ingresar toda la información del producto']);
         }
- 
-        //Ingreso de los datos a la tabla PedidosProducts
+
         for($i=0;$i<count($products);$i++){
-        $actualizarProducto = Product::find($products[$i]["id"]);
+        $actualizarProducto = Product::find($products[$i]["id"]); //Ingreso de los datos a la tabla PedidosProducts
             
         $registro = new PedidoProduct();
         $registro->pedido_id=$idPedido;
@@ -56,33 +50,30 @@ class OrderController extends Controller
             return response()->json(['message' => 'Verificar la cantidad ingresada']);
         }
         $registro->save();
-        //Para la actualización del inventario
         $actualizarProducto->inventory -= $registro->quantity;
-        $actualizarProducto->save();
+        $actualizarProducto->save(); //actualización del inventario
         
     } 
        
         DB::commit();
 
-        return response()->json(['message' => 'Datos ingresados correctamente']);
+        return response()->json(['message' => 'Los datos se ingresaron correctamente']);
 
         }
 
         catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Verificar la información ingresada']);
+            return response()->json(['message' => 'Error en la información ingresada']);
         }
           return response()->json(['message' => 'Correcto']);
 
     
     }
 
-
     public function index() {
         $pedidos = Pedido::with(['products'])->get();
         return response()->json($pedidos, 200);
     }
-
 
     public function getById($email) {
         $pedidos = Pedido::with(['products'])
