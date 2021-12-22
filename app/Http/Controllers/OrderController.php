@@ -7,12 +7,9 @@ use Illuminate\Support\Facades\log;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Arr;
 use Illuminate\Support\Facades\DB;
-
 use App\Models\Product;
 use App\Models\Pedido;
 use App\Models\PedidoProduct;
-
-
 
 class OrderController extends Controller
 {
@@ -60,16 +57,12 @@ class OrderController extends Controller
         return response()->json(['message' => 'Los datos del pedido se ingresaron correctamente']);
 
         }
-
         catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['message' => 'Error en la información ingresada']);
         }
-          return response()->json(['message' => 'Correcto']);
-
-    
+          return response()->json(['message' => 'Correcto']);    
     }
-
     public function index() {
         $pedidos = Pedido::with(['products'])->get();
         return response()->json($pedidos, 200);
