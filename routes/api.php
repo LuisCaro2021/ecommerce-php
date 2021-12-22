@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductApiController;
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PedidoController;
 use App\Models\Product;
 use App\Models\Pedido;
 use App\Models\PedidoProduct;
@@ -30,9 +30,9 @@ Route::post('oauth/token', 'Laravel\Passport\Http\Controllers\AccessTokenControl
 
 Route::post('product', [ProductApiController::class, 'store']);
 
-Route::get('pedido', [OrderController::class, 'index']);
+Route::get('pedido', [PedidoController::class, 'index']);
 
-Route::post('pedido', [OrderController::class, 'create']);
+Route::post('pedido', [PedidoController::class, 'create']);
 
-Route::get('pedido/{email}', [OrderController::class, 'getById']);
+Route::get('pedido/{email}', [PedidoController::class, 'getById']);
 

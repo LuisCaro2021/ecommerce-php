@@ -11,7 +11,7 @@ use App\Models\Product;
 use App\Models\Pedido;
 use App\Models\PedidoProduct;
 
-class OrderController extends Controller
+class PedidoController extends Controller
 {
     public function create(Request $request)
     {       
